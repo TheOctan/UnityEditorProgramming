@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Skeleton
   _monsterType: 1
   _chanceToDropItem: 61.5
-  _rangeOfAwareness: 7
+  _rangeOfAwareness: 2.5
   _damage: 5
   _health: 20
   _speed: 10

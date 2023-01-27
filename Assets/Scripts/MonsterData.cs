@@ -8,7 +8,7 @@ public class MonsterData : ScriptableObject
     [SerializeField] private MonsterType _monsterType;
     [SerializeField, Range(0, 100)] private float _chanceToDropItem = 50f;
     [Tooltip("Radius size where monster will see the player")]
-    [SerializeField] private float _rangeOfAwareness = 10f;
+    [SerializeField, Min(0)] private float _rangeOfAwareness = 10f;
 
     [Header("Combat stats")]
     [SerializeField] private int _damage = 1;
