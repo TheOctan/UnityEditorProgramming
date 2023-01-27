@@ -4,8 +4,8 @@ public class Monster : MonoBehaviour
 {
     [Header("General stats")]
     [SerializeField] private string _name;
-
-    [SerializeField, Range(0, 100)] private float _chanceToDropItem;
+    [SerializeField] private MonsterType _monsterType;
+    [SerializeField, Range(0, 100)] private float _chanceToDropItem = 50f;
     [Tooltip("Radius size where monster will see the player")]
     [SerializeField] private float _rangeOfAwareness;
 

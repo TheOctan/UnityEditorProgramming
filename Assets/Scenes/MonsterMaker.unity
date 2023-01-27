@@ -183,7 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skeleton
-  _chanceToDropItem: 20.3
+  _monsterType: 1
+  _chanceToDropItem: 50
   _rangeOfAwareness: 0
   _damage: 0
   _health: 0
