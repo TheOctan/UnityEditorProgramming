@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d591e043e48334682bc626b37b3227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterData: {fileID: 11400000, guid: 2ac746b6f1d396b48833767480786570, type: 2}
+  _data: {fileID: 11400000, guid: 2ac746b6f1d396b48833767480786570, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d591e043e48334682bc626b37b3227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterData: {fileID: 11400000, guid: a4210efce4f963647b4663631dc55027, type: 2}
+  _data: {fileID: 11400000, guid: a4210efce4f963647b4663631dc55027, type: 2}
 --- !u!65 &1711563504
 BoxCollider:
   m_ObjectHideFlags: 0
