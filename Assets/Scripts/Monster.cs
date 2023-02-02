@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [SelectionBase]
@@ -15,6 +14,7 @@ public class Monster : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (_data == null) return;
 
         Transform t = transform;
         Vector3 position = t.position + Vector3.up * 0.5f;
