@@ -1,41 +1,44 @@
 ﻿using UnityEngine;
 
-public class PatrolBetweenPoints : MonoBehaviour
+namespace OctanGames
 {
-    [SerializeField] private Transform[] _patrolPoints;
-
-    [Header("Gizmo settings")]
-    [SerializeField] private float _patrolPointSize = 0.25f;
-    [SerializeField] private Color _patrolPointColor = Color.cyan;
-    [SerializeField] private Color _patrolPathColor = Color.blue;
-
-    private void OnDrawGizmos()
+    public class PatrolBetweenPoints : MonoBehaviour
     {
-        DrawPoints();
-        DrawPath();
-    }
+        [SerializeField] private Transform[] _patrolPoints;
 
-    private void DrawPoints()
-    {
-        Gizmos.color = _patrolPointColor;
-        foreach (Transform point in _patrolPoints)
+        [Header("Gizmo settings")]
+        [SerializeField] private float _patrolPointSize = 0.25f;
+        [SerializeField] private Color _patrolPointColor = Color.cyan;
+        [SerializeField] private Color _patrolPathColor = Color.blue;
+
+        private void OnDrawGizmos()
         {
-            if(point == null) continue;
-            Gizmos.DrawSphere(point.position, _patrolPointSize);
+            DrawPoints();
+            DrawPath();
         }
-    }
 
-    private void DrawPath()
-    {
-        Gizmos.color = _patrolPathColor;
-        for (var i = 0; i < _patrolPoints.Length - 1; i++)
+        private void DrawPoints()
         {
-            if (_patrolPoints[i] == null || _patrolPoints[i + 1] == null) continue;
+            Gizmos.color = _patrolPointColor;
+            foreach (Transform point in _patrolPoints)
+            {
+                if(point == null) continue;
+                Gizmos.DrawSphere(point.position, _patrolPointSize);
+            }
+        }
 
-            Vector3 point = _patrolPoints[i].position;
-            Vector3 nextPoint = _patrolPoints[i + 1].position;
+        private void DrawPath()
+        {
+            Gizmos.color = _patrolPathColor;
+            for (var i = 0; i < _patrolPoints.Length - 1; i++)
+            {
+                if (_patrolPoints[i] == null || _patrolPoints[i + 1] == null) continue;
 
-            Gizmos.DrawLine(point, nextPoint);
+                Vector3 point = _patrolPoints[i].position;
+                Vector3 nextPoint = _patrolPoints[i + 1].position;
+
+                Gizmos.DrawLine(point, nextPoint);
+            }
         }
     }
 }

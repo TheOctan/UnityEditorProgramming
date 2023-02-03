@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Attributes
+namespace OctanGames.Attributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
     public class SeparatorAttribute : PropertyAttribute
