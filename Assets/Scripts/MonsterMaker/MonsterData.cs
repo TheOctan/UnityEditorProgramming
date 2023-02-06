@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using OctanGames.Attributes;
+using UnityEngine;
 
 namespace OctanGames.MonsterMaker
 {
@@ -11,6 +12,8 @@ namespace OctanGames.MonsterMaker
         [SerializeField, Range(0, 100)] private float _chanceToDropItem = 50f;
         [Tooltip("Radius size where monster will see the player")]
         [SerializeField, Min(0)] private float _rangeOfAwareness = 10f;
+
+        [Separator]
         [SerializeField] private bool _canEnterCombat = true;
 
         [Header("Combat stats")]
@@ -18,7 +21,7 @@ namespace OctanGames.MonsterMaker
         [SerializeField] private int _speed = 1;
         [SerializeField] private int _damage = 1;
 
-        [Header("Dialogue")]
+        [Separator, Header("Dialogue")]
         [SerializeField, TextArea] private string _battleCry;
 
         public string Name => _name;

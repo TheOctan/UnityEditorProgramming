@@ -82,6 +82,10 @@ public class MonsterDataEditor : Editor
             EditorGUILayout.EndHorizontal();
             EditorGUIUtility.labelWidth = defaultLabelWidth;
 
+            if (GUILayout.Button("Randomize stats"))
+            {
+                RandomizeStats();
+            }
             EditorGUI.indentLevel--;
         }
         EditorGUILayout.EndFadeGroup();
@@ -98,5 +102,12 @@ public class MonsterDataEditor : Editor
     {
         Rect rect = GUILayoutUtility.GetRect(18, 18, EditorStyles.textField);
         EditorGUI.ProgressBar(rect, value, label);
+    }
+
+    private void RandomizeStats()
+    {
+        _health.intValue = Random.Range(1, 25);
+        _speed.intValue = Random.Range(1, 25);
+        _damage.intValue = Random.Range(1, 25);
     }
 }
