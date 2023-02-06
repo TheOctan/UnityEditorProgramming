@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
-namespace OctanGames.CustomGizmos
+namespace OctanGames.VisualDebug
 {
     [AddComponentMenu("Editor/Custom Gizmos")]
     public class CustomGizmos : MonoBehaviour
     {
         private const string CUSTOM_GIZMOS_ICON = "CustomGizmos Icon";
+        private const string GIZMOS_PATH = "OctanGames/VisualDebug";
 
         [SerializeField] private bool _enabled = true;
         [SerializeField] private GizmoType _type = GizmoType.WireSphere;
         [SerializeField] private Color _color = Color.white;
 
-        [Header("Properties")]
         [SerializeField] private Vector3 _offset;
 
         [SerializeField] private Vector3 _startPoint;
@@ -109,9 +110,10 @@ namespace OctanGames.CustomGizmos
                     Gizmos.DrawGUITexture(rect, _texture, _material);
                     break;
                 case GizmoType.Icon:
-                    string path = string.IsNullOrEmpty(_iconName)
+                    string iconName = string.IsNullOrEmpty(_iconName)
                         ? CUSTOM_GIZMOS_ICON
                         : _iconName;
+                    string path = Path.Combine(GIZMOS_PATH, iconName);
                     Gizmos.DrawIcon(transform.position, path, true, _color);
                     break;
             }

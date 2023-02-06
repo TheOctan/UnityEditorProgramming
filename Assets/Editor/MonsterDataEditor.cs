@@ -23,16 +23,7 @@ public class MonsterDataEditor : Editor
 
     private void OnEnable()
     {
-        _name = serializedObject.FindProperty(nameof(_name));
-        _monsterType = serializedObject.FindProperty(nameof(_monsterType));
-        _chanceToDropItem = serializedObject.FindProperty(nameof(_chanceToDropItem));
-        _rangeOfAwareness = serializedObject.FindProperty(nameof(_rangeOfAwareness));
-        _canEnterCombat = serializedObject.FindProperty(nameof(_canEnterCombat));
-        _damage = serializedObject.FindProperty(nameof(_damage));
-        _health = serializedObject.FindProperty(nameof(_health));
-        _speed = serializedObject.FindProperty(nameof(_speed));
-        _battleCry = serializedObject.FindProperty(nameof(_battleCry));
-
+        FindProperties();
         _canEnterCombatAnimBool = new AnimBool(_canEnterCombat.boolValue, Repaint);
     }
 
@@ -45,7 +36,7 @@ public class MonsterDataEditor : Editor
         DrawProgressBar(difficulty / 100, "Difficulty");
 
         EditorGUI.BeginChangeCheck();
-        
+
         EditorGUILayout.PropertyField(_name);
         if (_name.stringValue == string.Empty)
         {
@@ -109,5 +100,18 @@ public class MonsterDataEditor : Editor
         _health.intValue = Random.Range(1, 25);
         _speed.intValue = Random.Range(1, 25);
         _damage.intValue = Random.Range(1, 25);
+    }
+
+    private void FindProperties()
+    {
+        _name = serializedObject.FindProperty(nameof(_name));
+        _monsterType = serializedObject.FindProperty(nameof(_monsterType));
+        _chanceToDropItem = serializedObject.FindProperty(nameof(_chanceToDropItem));
+        _rangeOfAwareness = serializedObject.FindProperty(nameof(_rangeOfAwareness));
+        _canEnterCombat = serializedObject.FindProperty(nameof(_canEnterCombat));
+        _damage = serializedObject.FindProperty(nameof(_damage));
+        _health = serializedObject.FindProperty(nameof(_health));
+        _speed = serializedObject.FindProperty(nameof(_speed));
+        _battleCry = serializedObject.FindProperty(nameof(_battleCry));
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace OctanGames.CustomGizmos
+﻿namespace OctanGames.VisualDebug
 {
     public enum GizmoType
     {

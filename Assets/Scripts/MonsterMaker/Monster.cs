@@ -1,4 +1,3 @@
-using OctanGames.Attributes;
 using UnityEngine;
 
 namespace OctanGames.MonsterMaker
@@ -13,6 +12,8 @@ namespace OctanGames.MonsterMaker
         private void Awake()
         {
             Debug.Log($"Name {_data.Name}\nDamage {_data.Damage}");
+            const string parsedValue = "Undead";
+            Debug.Log(MonsterType.TryParse(parsedValue, out MonsterType type) ? type : "Not parsed");
         }
 
         private void OnDrawGizmosSelected()
