@@ -14,9 +14,9 @@ namespace OctanGames.MonsterMaker
         [SerializeField] private bool _canEnterCombat = true;
 
         [Header("Combat stats")]
-        [SerializeField] private int _damage = 1;
         [SerializeField] private int _health = 1;
         [SerializeField] private int _speed = 1;
+        [SerializeField] private int _damage = 1;
 
         [Header("Dialogue")]
         [SerializeField, TextArea] private string _battleCry;

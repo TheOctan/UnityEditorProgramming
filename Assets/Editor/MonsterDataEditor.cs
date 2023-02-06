@@ -67,14 +67,21 @@ public class MonsterDataEditor : Editor
         if (EditorGUILayout.BeginFadeGroup(_canEnterCombatAnimBool.faded))
         {
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(_damage);
+
+            float defaultLabelWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 70;
             EditorGUILayout.PropertyField(_health);
             if (_health.intValue < 0)
             {
                 EditorGUILayout.HelpBox("Should not have negative Health", MessageType.Warning);
             }
 
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PropertyField(_speed);
+            EditorGUILayout.PropertyField(_damage);
+            EditorGUILayout.EndHorizontal();
+            EditorGUIUtility.labelWidth = defaultLabelWidth;
+
             EditorGUI.indentLevel--;
         }
         EditorGUILayout.EndFadeGroup();
