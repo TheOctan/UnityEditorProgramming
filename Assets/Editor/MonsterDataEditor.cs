@@ -1,7 +1,9 @@
 ﻿using OctanGames.MonsterMaker;
 using UnityEditor;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 
+[CanEditMultipleObjects]
 [CustomEditor(typeof(MonsterData))]
 public class MonsterDataEditor : Editor
 {
@@ -17,6 +19,8 @@ public class MonsterDataEditor : Editor
 
     private SerializedProperty _battleCry;
 
+    private AnimBool _canEnterCombatAnimBool;
+
     private void OnEnable()
     {
         _name = serializedObject.FindProperty(nameof(_name));
@@ -28,6 +32,8 @@ public class MonsterDataEditor : Editor
         _health = serializedObject.FindProperty(nameof(_health));
         _speed = serializedObject.FindProperty(nameof(_speed));
         _battleCry = serializedObject.FindProperty(nameof(_battleCry));
+
+        _canEnterCombatAnimBool = new AnimBool(_canEnterCombat.boolValue, Repaint);
     }
 
     public override void OnInspectorGUI()
@@ -57,7 +63,8 @@ public class MonsterDataEditor : Editor
         EditorGUILayout.PropertyField(_rangeOfAwareness);
         EditorGUILayout.PropertyField(_canEnterCombat);
 
-        if (_canEnterCombat.boolValue)
+        _canEnterCombatAnimBool.target = _canEnterCombat.boolValue;
+        if (EditorGUILayout.BeginFadeGroup(_canEnterCombatAnimBool.faded))
         {
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(_damage);
@@ -70,6 +77,7 @@ public class MonsterDataEditor : Editor
             EditorGUILayout.PropertyField(_speed);
             EditorGUI.indentLevel--;
         }
+        EditorGUILayout.EndFadeGroup();
 
         EditorGUILayout.PropertyField(_battleCry);
 
