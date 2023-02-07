@@ -65,3 +65,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb725fe9aa258a14fafd5dc4abf06568, type: 3}
+--- !u!1 &2939122063944812986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1404898869159301595, guid: cb725fe9aa258a14fafd5dc4abf06568, type: 3}
+  m_PrefabInstance: {fileID: 4302890248299812961}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7406109037480442923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2939122063944812986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d080396748c45ba8c200319b6b69b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _patrolPoints: []
+  _patrolPointSize: 0.25
+  _patrolPointColor: {r: 0, g: 1, b: 1, a: 1}
+  _patrolPathColor: {r: 0, g: 0, b: 1, a: 1}
+  _drawOnlySelected: 1

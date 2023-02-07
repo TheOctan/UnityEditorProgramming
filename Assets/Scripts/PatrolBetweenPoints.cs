@@ -10,8 +10,23 @@ namespace OctanGames
         [SerializeField] private float _patrolPointSize = 0.25f;
         [SerializeField] private Color _patrolPointColor = Color.cyan;
         [SerializeField] private Color _patrolPathColor = Color.blue;
+        
+        [Header("Editor Only")]
+        [SerializeField] private bool _drawOnlySelected = true;
 
         private void OnDrawGizmos()
+        {
+            if (_drawOnlySelected) return;
+            DrawGizmos();
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (!_drawOnlySelected) return;
+            DrawGizmos();
+        }
+
+        private void DrawGizmos()
         {
             DrawPoints();
             DrawPath();
@@ -20,6 +35,7 @@ namespace OctanGames
         private void DrawPoints()
         {
             Gizmos.color = _patrolPointColor;
+            if (_patrolPoints == null) return;
             foreach (Transform point in _patrolPoints)
             {
                 if(point == null) continue;
