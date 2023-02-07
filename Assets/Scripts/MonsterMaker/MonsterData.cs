@@ -24,6 +24,8 @@ namespace OctanGames.MonsterMaker
         [Separator, Header("Dialogue")]
         [SerializeField, TextArea] private string _battleCry;
 
+        [SerializeField] private MonsterAbility[] _abilities;
+
         public string Name => _name;
         public MonsterType Type => _monsterType;
         public float ChanceToDropItem => _chanceToDropItem;
@@ -32,5 +34,7 @@ namespace OctanGames.MonsterMaker
         public int Damage => _damage;
         public int Health => _health;
         public int Speed => _speed;
+        public string BattleCry => _battleCry;
+        public MonsterAbility[] Abilities => _abilities;
     }
 }

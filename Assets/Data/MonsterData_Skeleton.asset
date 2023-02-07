@@ -21,3 +21,13 @@ MonoBehaviour:
   _speed: 15
   _damage: 7
   _battleCry: 
+  _abilities:
+  - _name: 
+    _damage: 0
+    _element: 0
+  - _name: 
+    _damage: 0
+    _element: 0
+  - _name: 
+    _damage: 0
+    _element: 0

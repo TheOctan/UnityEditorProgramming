@@ -6,6 +6,7 @@ namespace OctanGames.MonsterMaker
     public class Monster : MonoBehaviour
     {
         [SerializeField] private MonsterData _data;
+        [SerializeField] private MonsterAbility _ability;
 
         public MonsterData Data => _data;
 
