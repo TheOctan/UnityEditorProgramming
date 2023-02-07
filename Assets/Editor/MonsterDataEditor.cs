@@ -3,115 +3,122 @@ using UnityEditor;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
 
-[CanEditMultipleObjects]
-[CustomEditor(typeof(MonsterData))]
-public class MonsterDataEditor : Editor
+namespace OctanGames
 {
-    private SerializedProperty _name;
-    private SerializedProperty _monsterType;
-    private SerializedProperty _chanceToDropItem;
-    private SerializedProperty _rangeOfAwareness;
-    private SerializedProperty _canEnterCombat;
-
-    private SerializedProperty _damage;
-    private SerializedProperty _health;
-    private SerializedProperty _speed;
-
-    private SerializedProperty _battleCry;
-
-    private AnimBool _canEnterCombatAnimBool;
-
-    private void OnEnable()
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(MonsterData))]
+    public class MonsterDataEditor : Editor
     {
-        FindProperties();
-        _canEnterCombatAnimBool = new AnimBool(_canEnterCombat.boolValue, Repaint);
-    }
+        private SerializedProperty _name;
+        private SerializedProperty _monsterType;
+        private SerializedProperty _chanceToDropItem;
+        private SerializedProperty _rangeOfAwareness;
+        private SerializedProperty _canEnterCombat;
 
-    public override void OnInspectorGUI()
-    {
-        serializedObject.UpdateIfRequiredOrScript();
+        private SerializedProperty _damage;
+        private SerializedProperty _health;
+        private SerializedProperty _speed;
 
-        EditorGUILayout.LabelField(_name.stringValue.ToUpper(), EditorStyles.boldLabel);
-        float difficulty = _health.intValue + _damage.intValue + _speed.intValue;
-        DrawProgressBar(difficulty / 100, "Difficulty");
+        private SerializedProperty _battleCry;
+        private SerializedProperty _abilities;
 
-        EditorGUI.BeginChangeCheck();
+        private AnimBool _canEnterCombatAnimBool;
 
-        EditorGUILayout.PropertyField(_name);
-        if (_name.stringValue == string.Empty)
+        private void OnEnable()
         {
-            EditorGUILayout.HelpBox(
-                "Caution: No name specified. Please name the monster!", MessageType.Warning);
+            FindProperties();
+            _canEnterCombatAnimBool = new AnimBool(_canEnterCombat.boolValue, Repaint);
         }
 
-        EditorGUILayout.PropertyField(_monsterType);
-        if ((MonsterType)_monsterType.enumValueIndex == MonsterType.Undefined)
+        public override void OnInspectorGUI()
         {
-            EditorGUILayout.HelpBox("No Monster type selected", MessageType.Warning);
-        }
+            serializedObject.UpdateIfRequiredOrScript();
 
-        EditorGUILayout.PropertyField(_chanceToDropItem);
-        EditorGUILayout.PropertyField(_rangeOfAwareness);
-        EditorGUILayout.PropertyField(_canEnterCombat);
+            EditorGUILayout.LabelField(_name.stringValue.ToUpper(), EditorStyles.boldLabel);
+            float difficulty = _health.intValue + _damage.intValue + _speed.intValue;
+            DrawProgressBar(difficulty / 100, "Difficulty");
 
-        _canEnterCombatAnimBool.target = _canEnterCombat.boolValue;
-        if (EditorGUILayout.BeginFadeGroup(_canEnterCombatAnimBool.faded))
-        {
-            EditorGUI.indentLevel++;
+            EditorGUI.BeginChangeCheck();
 
-            float defaultLabelWidth = EditorGUIUtility.labelWidth;
-            EditorGUIUtility.labelWidth = 70;
-            EditorGUILayout.PropertyField(_health);
-            if (_health.intValue < 0)
+            EditorGUILayout.PropertyField(_name);
+            if (_name.stringValue == string.Empty)
             {
-                EditorGUILayout.HelpBox("Should not have negative Health", MessageType.Warning);
+                EditorGUILayout.HelpBox(
+                    "Caution: No name specified. Please name the monster!", MessageType.Warning);
             }
 
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(_speed);
-            EditorGUILayout.PropertyField(_damage);
-            EditorGUILayout.EndHorizontal();
-            EditorGUIUtility.labelWidth = defaultLabelWidth;
-
-            if (GUILayout.Button("Randomize stats"))
+            EditorGUILayout.PropertyField(_monsterType);
+            if ((MonsterType)_monsterType.enumValueIndex == MonsterType.Undefined)
             {
-                RandomizeStats();
+                EditorGUILayout.HelpBox("No Monster type selected", MessageType.Warning);
             }
-            EditorGUI.indentLevel--;
+
+            EditorGUILayout.PropertyField(_chanceToDropItem);
+            EditorGUILayout.PropertyField(_rangeOfAwareness);
+            EditorGUILayout.PropertyField(_canEnterCombat);
+
+            _canEnterCombatAnimBool.target = _canEnterCombat.boolValue;
+            if (EditorGUILayout.BeginFadeGroup(_canEnterCombatAnimBool.faded))
+            {
+                EditorGUI.indentLevel++;
+
+                float defaultLabelWidth = EditorGUIUtility.labelWidth;
+                EditorGUIUtility.labelWidth = 70;
+                EditorGUILayout.PropertyField(_health);
+                if (_health.intValue < 0)
+                {
+                    EditorGUILayout.HelpBox("Should not have negative Health", MessageType.Warning);
+                }
+
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PropertyField(_speed);
+                EditorGUILayout.PropertyField(_damage);
+                EditorGUILayout.EndHorizontal();
+                EditorGUIUtility.labelWidth = defaultLabelWidth;
+
+                EditorGUILayout.Space(10);
+                if (GUILayout.Button("Randomize stats"))
+                {
+                    RandomizeStats();
+                }
+                EditorGUI.indentLevel--;
+            }
+            EditorGUILayout.EndFadeGroup();
+
+            EditorGUILayout.PropertyField(_battleCry);
+            EditorGUILayout.PropertyField(_abilities);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
         }
-        EditorGUILayout.EndFadeGroup();
 
-        EditorGUILayout.PropertyField(_battleCry);
-
-        if (EditorGUI.EndChangeCheck())
+        private static void DrawProgressBar(float value, string label)
         {
-            serializedObject.ApplyModifiedProperties();
+            Rect rect = GUILayoutUtility.GetRect(18, 18, EditorStyles.textField);
+            EditorGUI.ProgressBar(rect, value, label);
         }
-    }
 
-    private static void DrawProgressBar(float value, string label)
-    {
-        Rect rect = GUILayoutUtility.GetRect(18, 18, EditorStyles.textField);
-        EditorGUI.ProgressBar(rect, value, label);
-    }
+        private void RandomizeStats()
+        {
+            _health.intValue = Random.Range(1, 25);
+            _speed.intValue = Random.Range(1, 25);
+            _damage.intValue = Random.Range(1, 25);
+        }
 
-    private void RandomizeStats()
-    {
-        _health.intValue = Random.Range(1, 25);
-        _speed.intValue = Random.Range(1, 25);
-        _damage.intValue = Random.Range(1, 25);
-    }
-
-    private void FindProperties()
-    {
-        _name = serializedObject.FindProperty(nameof(_name));
-        _monsterType = serializedObject.FindProperty(nameof(_monsterType));
-        _chanceToDropItem = serializedObject.FindProperty(nameof(_chanceToDropItem));
-        _rangeOfAwareness = serializedObject.FindProperty(nameof(_rangeOfAwareness));
-        _canEnterCombat = serializedObject.FindProperty(nameof(_canEnterCombat));
-        _damage = serializedObject.FindProperty(nameof(_damage));
-        _health = serializedObject.FindProperty(nameof(_health));
-        _speed = serializedObject.FindProperty(nameof(_speed));
-        _battleCry = serializedObject.FindProperty(nameof(_battleCry));
+        private void FindProperties()
+        {
+            _name = serializedObject.FindProperty(nameof(_name));
+            _monsterType = serializedObject.FindProperty(nameof(_monsterType));
+            _chanceToDropItem = serializedObject.FindProperty(nameof(_chanceToDropItem));
+            _rangeOfAwareness = serializedObject.FindProperty(nameof(_rangeOfAwareness));
+            _canEnterCombat = serializedObject.FindProperty(nameof(_canEnterCombat));
+            _damage = serializedObject.FindProperty(nameof(_damage));
+            _health = serializedObject.FindProperty(nameof(_health));
+            _speed = serializedObject.FindProperty(nameof(_speed));
+            _battleCry = serializedObject.FindProperty(nameof(_battleCry));
+            _abilities = serializedObject.FindProperty(nameof(_abilities));
+        }
     }
 }

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctanGames
+namespace OctanGames.Drawers
 {
     [CustomPropertyDrawer(typeof(SeparatorAttribute))]
     public class SeparatorDrawer : DecoratorDrawer
