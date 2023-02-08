@@ -1,4 +1,5 @@
 ﻿using OctanGames.MonsterMaker;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,6 +21,20 @@ namespace OctanGames
             GUILayout.Label("Selection Filters:", EditorStyles.boldLabel);
             _selectedMonsterType =
                 (MonsterType)EditorGUILayout.EnumPopup("Monster type to select:", _selectedMonsterType);
+
+            EditorGUILayout.Space(5);
+            if (GUILayout.Button("Select All"))
+            {
+                SelectAllMonsters();
+            }
+        }
+
+        private void SelectAllMonsters()
+        {
+            Selection.objects = FindObjectsOfType<Monster>()
+                .Where(m => m.Data.Type == _selectedMonsterType)
+                .Select(m => m.gameObject as Object)
+                .ToArray();
         }
     }
 }
