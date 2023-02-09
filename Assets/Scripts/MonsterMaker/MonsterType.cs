@@ -4,8 +4,7 @@ namespace OctanGames.MonsterMaker
 {
     public enum MonsterType
     {
-        [InspectorName("None")]
-        Undefined = 0,
+        None = 0,
         Undead,
         Humanoid,
         Dragon

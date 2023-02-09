@@ -48,7 +48,7 @@ namespace OctanGames
             }
 
             EditorGUILayout.PropertyField(_monsterType);
-            if ((MonsterType)_monsterType.enumValueIndex == MonsterType.Undefined)
+            if ((MonsterType)_monsterType.enumValueIndex == MonsterType.None)
             {
                 EditorGUILayout.HelpBox("No Monster type selected", MessageType.Warning);
             }
